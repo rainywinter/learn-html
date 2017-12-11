@@ -8,9 +8,9 @@
 </head>
 <body>
 
+    <p>学习html5 video</p>
 
-
-    <video id="video" width="1280" height="720" controls="controls"  >
+    <video id="video" width="1280" height="720" controls="controls" >
         <source src="../resource/video/平凡人的奥林匹克-花甲背包客.mp4">
     </video>
 
@@ -44,7 +44,9 @@
             video.addEventListener("pause",onPause)
             video.addEventListener("progress",onProgress)
 
-            video.addEventListener("keypress",onKeyPress)
+            // TODO 暂时未知 html5 video是否可直接支持 键盘事件。采用折中办法，在整个文档区域内按下键盘
+            // video.addEventListener("keydown",function(){console.log("key down")})
+            // video.addEventListener("keyup",function(){console.log("up up up...")})
 
             var vLen;
 
@@ -73,8 +75,10 @@
                 // console.log("video progress: ",video.currentTime/video.duration)
             }
 
-            function onKeyPress(event){
-                console.log("event:keypress-> ",event.key)
+
+            document.addEventListener("keydown", onDocumentKeyDown)
+            function onDocumentKeyDown(event){
+                console.log("keyboard: ",event.key)
                 switch(event.key){
                     case " ":
                         if (video.paused && !video.ended){
@@ -85,17 +89,27 @@
                         break;
 
                     case "ArrowRight":
+                        if(!video.ended){
+                           var v = video.currentTime + 5 
+                           video.currentTime = parseFloat(v > video.duration ? video.duration : v)
+                        }
                         break;
 
                     case "ArrowLeft":
-
+                        if(!video.ended){
+                           var v = video.currentTime - 5 
+                           video.currentTime = v>0 ? v:0;
+                        }
                         break;
 
                     case "ArrowUp":
+                        var v = video.volume + 0.1
+                        video.volume = v > 1 ? 1:v
                         break;
                     
                     case "ArrowDown":
-
+                        var v = video.volume - 0.1
+                        video.volume = v < 0 ? 0:v;
                         break
                 }
             }
