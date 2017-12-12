@@ -6,5 +6,75 @@
         <title>Learn Mouse Event</title>
     </head>
 
-    <body
+    <body>
+
+        <button id="btn">我是一个按钮</button>
+
+        <p id="show"></p>
+
+
+        <script type="text/javascript">
+        
+        var btn = document.getElementById("btn")
+        var show = document.getElementById("show")
+
+
+        // btn.addEventListener("click",function(event){
+        //     show.innerHTML = "你单击点我了哦 " + "altkey:"+event.altKey + " ctrlkey:"+event.ctrlKey + " x:"+event.clientX + " y:"+event.clientY + " currentTarget:"+(event.currentTarget===btn)
+        // })
+
+        // // double click event会先触发 click
+        // btn.addEventListener("dblclick",function(event){
+        //     show.innerHTML = "你双击点我了哦 " 
+        // })
+
+        // capture both click and double click
+        var clicks = 0
+        btn.addEventListener("click",function(event){
+            clicks ++
+            if (clicks == 1){
+                setTimeout(() => {
+                    // single click
+                    if (clicks == 1){
+                        console.log("单击了哟")
+                        click(event)
+                    }else{
+                        console.log("双击了哟")
+                        doubleClick(event)
+                    }
+                    clicks = 0                    
+                }, 300);
+            }
+        })
+
+        function click(event){
+            show.innerHTML = "单击了哦" 
+        }
+
+        function doubleClick(event){
+            show.innerHTML = "双击了哦" 
+        }
+
+
+         // 进入元素
+        btn.addEventListener("mouseover",function(event){
+            console.log(event.type)
+        })
+
+        // 在元素上移动
+        btn.addEventListener("mousemove",function(event){
+            console.log(event.type)
+        })
+
+        // 移出元素
+        btn.addEventListener("mouseout",function(event){
+            console.log(event.type)
+        })
+
+
+        
+        </script>
+
+    </body>
+
 </html>
