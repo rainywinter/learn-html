@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Learn canvas</title>
+    </head>
+    <body>
+        <p>
+            <canvas id="canvas"></canvas>
+        </p>
+
+        <script type="text/javascript">
+            var canvas = document.getElementById("canvas")
+            var ctx = canvas.getContext('2d')
+
+            var colors = ['ff0000','#FF7F00','ffff00','00ff00','00ffff','0000ff','8b00ff']
+            setInterval(function(){
+                var color = colors[Math.floor(Math.random()*colors.length)]
+                console.log("color ",color)
+                ctx.clearRect(0,0,80,100)
+                ctx.fillStyle=color
+                ctx.fillRect(0,0,80,100)
+            },2000)
+           
+        </script>
+    </body>
+</html>
