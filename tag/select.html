@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Learn select</title>
+
+        
+    </head>
+    
+    <body>
+        
+        <br/><br/><br/>
+
+        <button id="add">增加</button>
+        <button id="min">减少</button>
+        <button id="clear">清除所有</button>
+
+        <select id="select" required="true">
+            <option value="friend">友情</option>
+            <option value="love">爱情</option>
+            <option value="nothing">四大皆空</option>
+        </select>
+
+        <script type="text/javascript">
+            var sel = document.getElementById("select")
+            sel.addEventListener("change",function(event){
+                console.log(sel.selectedIndex)
+            })
+
+            var add = document.getElementById("add")
+            var min = document.getElementById("min")
+            var clear = document.getElementById("clear")
+
+            add.addEventListener("click",function(){
+                sel.add(new Option("亲情","family"))
+            })
+            min.addEventListener("click",function(){
+                sel.remove(sel.options.length-1)
+            })
+
+            clear.addEventListener("click",function(){
+                sel.options.length = 0;
+            })
+
+        </script>
+    </body>
+</html>
